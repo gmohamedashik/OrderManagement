@@ -1,0 +1,65 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col">
+      <h3>Update Order</h3>
+    </div>
+    <div class="col text-right">
+      <a href="#" routerLink="/orders/list" class="btn btn-secondary btn-sm">Back To Orders List</a>
+    </div>
+  </div>
+  <br />
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm)">
+
+    <input formControlName="id"
+           id="id"
+           type="hidden" />
+
+    <div class="form-group">
+      <label for="orderNumber">Order No:</label>
+      <input formControlName="orderNumber"
+             id="orderNumber"
+             type="text"
+             class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+      <label for="orderAmount">Order Amount:</label>
+      <input formControlName="orderAmount"
+             id="orderAmount"
+             type="text"
+             class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <label for="orderDate">Order Date:</label>
+      <input formControlName="orderDate"
+             id="orderDate"
+             type="date"
+             class="form-control"/>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Vendor:</label>
+      <select formControlName="vendorId"
+              id="vendorId"
+              class="form-control">
+        <option value="">- Select -</option>
+        <option *ngFor="let vendor of vendors" [ngValue]="vendor.id">
+          {{vendor.name}}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="shopNumber">Shop No:</label>
+      <input formControlName="shopNumber"
+             id="shopNumber"
+             type="text"
+             class="form-control" />
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!editForm.valid">Update</button>
+  </form>
+</div>

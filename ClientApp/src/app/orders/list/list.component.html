@@ -1,0 +1,43 @@
+<div class="container">
+  <br />
+  <div class="row">
+    <div class="col">
+      <h3>Orders</h3>
+    </div>
+
+      <div *ngIf="msg" [ngClass]="clss">{{msg}}</div>
+
+    <div class="col text-right">
+      <a href="#" routerLink="/orders/create/" class="btn btn-success btn-sm">Create New Order</a>
+    </div>
+  </div>
+  <br />
+  <table class="table table-bordered table-sm">
+    <tr>
+      <th>  <input type="checkbox" [checked]="isAllCheckBoxChecked()" (change)="checkAllCheckBox($event)"> </th>
+      <th>Id</th>
+      <th>Order No</th>
+      <th>Order Amount</th>
+      <th>Order Date</th>
+      <th>Vendor</th>
+      <th>Shop No</th>
+      <th class="text-right" width="200px">
+        <button type="button" (click)="deleteOrders()" class="btn btn-danger btn-sm">Delete All</button>&nbsp;
+      </th>
+    </tr>
+    <tr *ngFor="let order of orders">
+      <td><input type="checkbox" value="{{order.id}}" [(ngModel)]="order.checked"></td>
+      <td>{{ order.id }}</td>
+      <td>{{ order.orderNumber }}</td>
+      <td>{{ order.orderAmount }}</td>
+      <td>{{ order.orderDate  | date: 'MM/dd/yyyy' }}</td>
+      <td>{{ order.vendor?.name }}</td>
+      <td>{{ order.shopNumber }}</td>
+      <td class="text-right">
+        <a href="#" [routerLink]="['/orders/', order.id, 'details']" class="btn btn-info btn-sm">View</a>&nbsp;
+        <a href="#" [routerLink]="['/orders/', order.id, 'edit']" class="btn btn-primary btn-sm">Edit</a>&nbsp;
+        <button type="button" (click)="deleteOrder(order.id)" class="btn btn-danger btn-sm">Delete</button>&nbsp;
+      </td>
+    </tr>
+  </table>
+</div>
